@@ -2,7 +2,7 @@ import StreamsPage from "./StreamsPageClient";
 
 export async function generateMetadata() {
   
-  const baseUrl = process.env.LIVE_LINK || "http://localhost:3000";
+  const baseUrl = process.env.LIVE_LINK || "https://buffstreams.us:3005";
 
   const res = await fetch(`${baseUrl}/api/posts`, {
     cache: "no-store",
