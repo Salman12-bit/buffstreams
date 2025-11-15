@@ -1,0 +1,100 @@
+.navbar {
+  width: 100%;
+  background-color: #1E2832;
+  background-size: cover;
+  background-position: center;
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+}
+
+.navContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navLogo {
+  color: rgb(216, 201, 201);
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: rgb(246, 246, 246);
+  margin: 4px 0;
+}
+
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+.navItem {
+  color: rgb(226, 222, 222);
+  text-decoration: none;
+  font-size: 1.1rem;
+  margin-left: 20px;
+}
+
+.navItem:hover {
+  color: #d3caca;
+}
+
+.button {
+  padding: 10px 18px;
+  background: transparent;
+  border: 2px solid white;
+  background-color: rgb(51, 48, 48);
+  border-radius: 9px;
+  color: white;
+  font-size: 15px;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+/* Responsive for mobile screens */
+@media (max-width: 768px) {
+  .navMenu {
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: -100%;
+    background-image: url('/jigsawplanet.avif');
+    width: 100%;
+    text-align: center;
+    transition: 0.5s ease-in-out;
+  }
+
+  .navMenu.active {
+    left: 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}

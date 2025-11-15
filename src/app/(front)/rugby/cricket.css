@@ -1,0 +1,137 @@
+.cricket-page {
+  padding: 30px;
+  background: #0b0e13;
+  min-height: 100vh;
+  color: #fff;
+  margin-top: 50px;
+}
+
+
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: #1b1f27;
+  color: #cbd5e1;
+  padding: 6px 18px;
+  border-radius: 6px;
+  border: 1px solid #2a2f3a;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+.filter-select {
+  background: #1b1f27;
+  color: #cbd5e1;
+  padding: 6px 18px;
+  border-radius: 6px;
+  border: 1px solid #2a2f3a;
+}
+
+
+.date-heading {
+  margin: 20px 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #94a3b8;
+}
+.date-heading span {
+  color: #fff;
+}
+
+
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+
+.match-card {
+  background: #10141b;
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  padding: 14px;
+  position: relative;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.match-card:hover {
+  transform: translateY(-4px);
+  border-color: #2563eb;
+}
+
+.match-date {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #1e293b;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #e5e7eb;
+}
+
+.match-star {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f97316;
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 50%;
+  font-size: 13px;
+}
+
+.image-bg img {
+  width: 80%;
+  border-radius: 6px;
+  margin: 20px auto 0;
+}
+.image-bg {
+  display: flex;
+  justify-content: center;
+}
+
+
+.match-title {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.match-league {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.match-time {
+  color: #e5e7eb;
+  font-size: 13px;
+}
+
+
+.delete-btn {
+  margin-top: 10px;
+  width: 100%;
+  background: #ef4444;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.delete-btn:hover {
+  background: #dc2626;
+}

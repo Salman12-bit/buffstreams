@@ -1,0 +1,74 @@
+.imgformat {
+  background-size: cover;
+  background-position: center;
+  margin-top: 50px;
+  width: 100%;
+  padding: 20px 0px;
+  margin-right: 10px;
+  background-color: #161C24;
+}
+
+.title {
+  font-size: 60px;
+  margin-bottom: 50px;
+  text-align: center;
+  color: white;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  color: white;
+}
+
+.image {
+  object-fit: contain;
+ 
+}
+
+@keyframes move {
+  from {
+    transform: translateY(-15px);
+  }
+
+  to {
+    transform: translateY(0px) scale(1.03);
+  }
+}
+
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: 20px;
+  margin-right: 10px;
+
+}
+
+.input {
+  padding: 20px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #fcfcfc;
+  border: 3px solid #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.textarea {
+  padding: 20px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  border: 3px solid #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 10px;
+}
