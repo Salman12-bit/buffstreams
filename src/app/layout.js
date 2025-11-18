@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <head>
-        <meta name="google-site-verification" content="QY_TMPPlZuR_oQAF0JPwngL9VzO3wwLFykte--_fgfM" />
+        <meta name="google-site-verification" content="oMZXDI1wVbxlIA9uS9BtkM9sorkjaO68P_GXgLyBJYI" />
         <link rel="icon" type="image/png" href="/favicon.webp" />
       </head>
 
