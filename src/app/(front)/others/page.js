@@ -3,9 +3,11 @@
 import "./cricket.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function Cricketpage() {
   const router = useRouter();
+  const { data: session } = useSession(); // ✅ For admin check
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,6 +34,7 @@ export default function Cricketpage() {
   }, []);
 
   const handleDelete = async (id) => {
+    if (session?.user?.role !== "admin") return; // 🔒 Only admin can delete
     try {
       await fetch(`/api/posts/${id}`, { method: "DELETE" });
       getData();
@@ -41,7 +44,7 @@ export default function Cricketpage() {
   };
 
   const handleCardClick = (id) => {
-    router.push("/livematch"); 
+    router.push("/livematch");
   };
 
   return (
@@ -51,7 +54,7 @@ export default function Cricketpage() {
         <button className="filter-btn">Popular</button>
 
         <select className="filter-select">
-          <option>Cricket Matches</option>
+          <option>Other Sports</option>
         </select>
       </div>
 
@@ -69,8 +72,8 @@ export default function Cricketpage() {
             ?.filter((post) =>
               post.title?.toLowerCase().includes("other") ||
               post.content?.toLowerCase().includes("other") ||
-              post.title?.toLowerCase().includes("others") ||         
-              post.content?.toLowerCase().includes("others") 
+              post.title?.toLowerCase().includes("others") ||
+              post.content?.toLowerCase().includes("others")
             )
             .map((post) => (
               <div className="card-wrapper" key={post._id}>
@@ -80,25 +83,24 @@ export default function Cricketpage() {
                   style={{ cursor: "pointer" }}
                 >
                   <div className="match-date">{post.date || "Today"}</div>
-
                   <div className="match-star">★</div>
-
                   <div className="match-flags image-bg">
                     <img src={post.file} alt="post" />
                   </div>
-
                   <h4 className="match-title">{post.title}</h4>
                   <p className="match-league">{post.content}</p>
                   <p className="match-time">{post.time || "No Time"}</p>
                 </div>
 
-               
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(post._id)}
-                >
-                  Delete
-                </button>
+                
+                {session?.user?.role === "admin" && (
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(post._id)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             ))
         )}

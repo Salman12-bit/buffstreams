@@ -3,9 +3,12 @@
 import "./cricket.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function Cricketpage() {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +36,8 @@ export default function Cricketpage() {
 
   const handleDelete = async (id) => {
     try {
+      if (session?.user?.role !== "admin") return; // 🔒 Only admin can delete
+
       await fetch(`/api/posts/${id}`, { method: "DELETE" });
       getData();
     } catch (err) {
@@ -85,18 +90,16 @@ export default function Cricketpage() {
               post.title?.toLowerCase().includes("pass") ||
               post.content?.toLowerCase().includes("pass")
             )
-
             .map((post) => (
               <div className="card-wrapper" key={post._id}>
 
-                {/* ✅ Clickable card using router.push */}
+                {/* Card Click */}
                 <div
                   className="match-card"
                   onClick={() => handleCardClick(post._id)}
                   style={{ cursor: "pointer" }}
                 >
                   <div className="match-date">{post.date || "Today"}</div>
-
                   <div className="match-star">★</div>
 
                   <div className="match-flags image-bg">
@@ -109,12 +112,14 @@ export default function Cricketpage() {
                 </div>
 
 
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(post._id)}
-                >
-                  Delete
-                </button>
+                {session?.user?.role === "admin" && (
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(post._id)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             ))
         )}

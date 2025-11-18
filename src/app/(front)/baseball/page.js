@@ -3,9 +3,11 @@
 import "./cricket.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react"; 
 
 export default function Cricketpage() {
   const router = useRouter();
+  const { data: session } = useSession(); // 
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,6 +35,7 @@ export default function Cricketpage() {
 
   const handleDelete = async (id) => {
     try {
+      if (session?.user?.role !== "admin") return; 
       await fetch(`/api/posts/${id}`, { method: "DELETE" });
       getData();
     } catch (err) {
@@ -86,33 +89,29 @@ export default function Cricketpage() {
             )
             .map((post) => (
               <div className="card-wrapper" key={post._id}>
-
-
                 <div
                   className="match-card"
                   onClick={() => handleCardClick(post._id)}
                   style={{ cursor: "pointer" }}
                 >
                   <div className="match-date">{post.date || "Today"}</div>
-
                   <div className="match-star">★</div>
-
                   <div className="match-flags image-bg">
                     <img src={post.file} alt="post" />
                   </div>
-
                   <h4 className="match-title">{post.title}</h4>
                   <p className="match-league">{post.content}</p>
                   <p className="match-time">{post.time || "No Time"}</p>
                 </div>
 
-
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(post._id)}
-                >
-                  Delete
-                </button>
+                {session?.user?.role === "admin" && (  
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(post._id)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             ))
         )}

@@ -11,15 +11,26 @@ import {
   FaBlog,
   FaSignInAlt,
   FaUserPlus,
-  FaTachometerAlt
+  FaTachometerAlt,
 } from "react-icons/fa";
 import { GiPodium } from "react-icons/gi";
 import { FaFutbol } from "react-icons/fa";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const logout = async () => {
+    localStorage.removeItem("key");
+    await signOut({
+      callbackUrl: "https://buffstreams.us/login",
+    });
+    window.location.href = "https://buffstreams.us/login";
   };
 
   return (
@@ -56,18 +67,28 @@ const Navbar = () => {
             <GiPodium /> Standings
           </Link>
 
+          {session?.user?.role === "admin" && (
+            <>
+              <Link href="/dashboard" className={styles.navItem}>
+                <FaTachometerAlt /> Dashboard
+              </Link>
+            </>
+          )}
 
-          <Link href="/login" className={styles.navItem}>
-            <FaSignInAlt /> Login
-          </Link>
-
-          <Link href="/register" className={styles.navItem}>
-            <FaUserPlus /> Register
-          </Link>
-
-          <Link href="/dashboard" className={styles.navItem}>
-            <FaTachometerAlt /> Dashboard
-          </Link>
+          {session?.user ? (
+            <button className={styles.button} onClick={logout}>
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link href="/login" className={styles.navItem}>
+                <FaSignInAlt /> Login
+              </Link>
+              <Link href="/register" className={styles.navItem}>
+                <FaUserPlus /> Register
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

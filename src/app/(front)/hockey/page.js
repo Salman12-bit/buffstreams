@@ -3,13 +3,14 @@
 import "./cricket.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function Cricketpage() {
   const router = useRouter();
+  const { data: session } = useSession(); // ✅ Admin check
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
 
   const [viewCounts, setViewCounts] = useState({});
 
@@ -34,12 +35,11 @@ export default function Cricketpage() {
     getData();
   }, []);
 
-
+  // Initialize or load view counts from sessionStorage
   useEffect(() => {
     if (data.length === 0) return;
 
     const stored = sessionStorage.getItem("card_view_counts");
-
     if (stored) {
       setViewCounts(JSON.parse(stored));
     } else {
@@ -49,21 +49,20 @@ export default function Cricketpage() {
     }
   }, [data]);
 
-
+  // Save view counts to sessionStorage
   useEffect(() => {
     if (Object.keys(viewCounts).length > 0) {
       sessionStorage.setItem("card_view_counts", JSON.stringify(viewCounts));
     }
   }, [viewCounts]);
 
-
+  // Decrement counts when user leaves the page
   useEffect(() => {
     const handleUnload = () => {
       const stored = sessionStorage.getItem("card_view_counts");
       if (!stored) return;
 
       let counts = JSON.parse(stored);
-
       data.forEach((post) => {
         const key = `watching_card_${post._id}`;
         if (sessionStorage.getItem(key)) {
@@ -71,7 +70,6 @@ export default function Cricketpage() {
           sessionStorage.removeItem(key);
         }
       });
-
       sessionStorage.setItem("card_view_counts", JSON.stringify(counts));
     };
 
@@ -80,6 +78,7 @@ export default function Cricketpage() {
   }, [data]);
 
   const handleDelete = async (id) => {
+    if (session?.user?.role !== "admin") return; // ✅ Admin only
     try {
       await fetch(`/api/posts/${id}`, { method: "DELETE" });
       getData();
@@ -88,19 +87,15 @@ export default function Cricketpage() {
     }
   };
 
-
   const handleCardClick = (id) => {
     const key = `watching_card_${id}`;
-
     if (!sessionStorage.getItem(key)) {
       setViewCounts((prev) => ({
         ...prev,
         [id]: (prev[id] || 0) + 1,
       }));
-
       sessionStorage.setItem(key, "true");
     }
-
     router.push("/livematch");
   };
 
@@ -111,7 +106,7 @@ export default function Cricketpage() {
         <button className="filter-btn">Popular</button>
 
         <select className="filter-select">
-          <option>Cricket Matches</option>
+          <option>Hockey Matches</option>
         </select>
       </div>
 
@@ -121,9 +116,7 @@ export default function Cricketpage() {
 
       <div className="match-grid">
         {isLoading ? (
-          <div className="loader">
-            <div className="spinner"></div>
-          </div>
+          <div className="loader"><div className="spinner"></div></div>
         ) : err ? (
           <p className="error">Error loading posts.</p>
         ) : (
@@ -151,10 +144,13 @@ export default function Cricketpage() {
                 post.title?.toLowerCase().includes("overtime") ||
                 post.content?.toLowerCase().includes("overtime")
             )
-
             .map((post) => (
-              <div className="card-wrapper" key={post._id} style={{ position: "relative" }}>
-                
+              <div
+                className="card-wrapper"
+                key={post._id}
+                style={{ position: "relative" }}
+              >
+                {/* ✅ Live view count */}
                 <div className="view-count">
                   {viewCounts[post._id] ?? 0} 👁️ LIVE
                 </div>
@@ -174,14 +170,16 @@ export default function Cricketpage() {
                   <p className="match-time">{post.time || "No Time"}</p>
                 </div>
 
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(post._id)}
-                >
-                  Delete
-                </button>
+                {/* ✅ Delete button for admins only */}
+                {session?.user?.role === "admin" && (
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(post._id)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
-
             ))
         )}
       </div>
