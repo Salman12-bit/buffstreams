@@ -1,16 +1,16 @@
 export const metadata = {
-    title: "jigsaw planet Dashboard",
-    description: "Access your personal dashboard on jigsaw planet. Manage puzzles, track progress, and customize your profile.",
+    title: "Buffstreams Dashboard",
+    description: "Access your personal Buffstreams dashboard. Manage live streams, track favorite sports, and customize your experience.",
     openGraph: {
-        title: "jigsaw planet Dashboard",
-        description: "Explore your jigsaw planet dashboard to manage puzzles, view progress, and customize your experience.",
-        url: "https://example.com/dashboard",
+        title: "Buffstreams Dashboard",
+        description: "Explore your Buffstreams dashboard to manage live streams, view match updates, and personalize your sports tracking.",
+        url: "https://buffstreams.us/dashboard",
         images: [
             {
-                url: "https://example.com/images/jigsaw-planet-dashboard.jpg",
+                url: "https://buffstreams.us/images/favicon.webp", 
                 width: 1200,
                 height: 630,
-                alt: "View your personalized dashboard on Jigsaw Planet to track and manage puzzles",
+                alt: "View your personalized Buffstreams dashboard to track live sports and matches",
             },
         ],
     },

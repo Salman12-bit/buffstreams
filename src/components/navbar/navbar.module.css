@@ -62,7 +62,7 @@
 }
 
 .button {
-  padding: 10px 18px;
+  padding: 5px 5px;
   background: transparent;
   border: 2px solid white;
   background-color: rgb(51, 48, 48);
@@ -77,7 +77,7 @@
   cursor: pointer;
 }
 
-/* Responsive for mobile screens */
+
 @media (max-width: 768px) {
   .navMenu {
     flex-direction: column;

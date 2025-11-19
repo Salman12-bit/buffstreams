@@ -1,16 +1,16 @@
 export const metadata = {
-    title: "jigsaw planet Login Information",
-    description: "This is the login page for jigsaw planet.",
+    title: "Buffstreams Login",
+    description: "This is the login page for Buffstreams.",
     openGraph: {
-        title: "Jigsaw Planet Login",
-        description: "Log in to access jigsaw planet and start your puzzle journey.",
-        url: "https://example.com/login",
+        title: "Buffstreams Login",
+        description: "Log in to access Buffstreams and start following live sports and streams.",
+        url: "https://buffstreams.us/login", 
         images: [
             {
-                url: "https://example.com/images/jigsaw-planet-login.jpg",
+                url: "https://buffstreams.us/images/favicon.webp", 
                 width: 1200,
                 height: 630,
-                alt: "Login to jigsaw planet and start your puzzle journey",
+                alt: "Login to Buffstreams to follow live sports and streams",
             },
         ],
     },

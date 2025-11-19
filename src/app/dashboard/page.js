@@ -11,14 +11,22 @@ const buffDashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
-    setError(null); 
+    setLoading(true);
+    setError(null);
 
     const title = e.target[0].value;
     const desc = e.target[1].value;
-    const time = e.target[2].value;
-    const content = e.target[3].value;
-    const file = e.target[4].files[0];
+    const timeInput = e.target[2].value; 
+    const matchDate = e.target[3].value;
+    const content = e.target[4].value;
+    const file = e.target[5].files[0];
+
+    
+    const [hour, minute] = timeInput.split(":");
+    let hourNum = parseInt(hour);
+    const ampm = hourNum >= 12 ? "PM" : "AM";
+    hourNum = hourNum % 12 || 12; 
+    const time = `${hourNum}:${minute} ${ampm}`; 
 
     let imageUrl;
     if (file) {
@@ -46,13 +54,13 @@ const buffDashboard = () => {
         setLoading(false);
         return;
       }
-
     }
 
     const payload = {
       title,
       desc,
-      time,
+      time,        // Send the 12-hour time with AM/PM
+      matchDate,
       content,
       file: imageUrl,
     };
@@ -76,7 +84,7 @@ const buffDashboard = () => {
       setError("An error occurred while submitting the form");
       console.error(err);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -113,7 +121,11 @@ const buffDashboard = () => {
             </div>
             <div className="input-container">
               <label htmlFor="time">Time</label>
-              <input type="date" name="time" placeholder="time" required className="input" />
+              <input type="time" name="time" placeholder="time" required className="input" />
+            </div>
+            <div className="input-container">
+              <label htmlFor="matchDate">Match Date</label>
+              <input type="date" name="matchDate" placeholder="date" required className="input" />
             </div>
             <div className="input-container">
               <label htmlFor="content">Content</label>

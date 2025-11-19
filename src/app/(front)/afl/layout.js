@@ -11,7 +11,7 @@ export const metadata = {
         url: "https://buffstreams.us/afl",
         images: [
             {
-                url: "https://buffstreams.us/images/afl-preview.jpg",
+                url: "https://buffstreams.us/images/favicon.webp",
                 width: 1200,
                 height: 630,
                 alt: "Watch AFL matches live and upcoming on Buffstreams in HD",
@@ -43,14 +43,14 @@ export default function Layout({ children }) {
             "name": "Buffstreams",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://buffstreams.us/images/logo.png",
+                "url": "https://buffstreams.us/images/favicon.webp",
                 "width": 500,
                 "height": 500,
             },
         },
         "primaryImageOfPage": {
             "@type": "ImageObject",
-            "url": "https://buffstreams.us/images/afl-preview.jpg",
+            "url": "https://buffstreams.us/images/favicon.webp",
             "width": 1200,
             "height": 630,
         },

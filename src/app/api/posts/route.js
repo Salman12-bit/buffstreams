@@ -7,20 +7,20 @@ import Post from "@/models/Post";
 export const POST = async (req) => {
   try {
     const data = await req.json();
-    const { title, desc, time, content, file } = data;
+    const { title, desc, time, matchDate, content, file } = data;
 
-    if (!title || !desc || !time || !content || !file) {
+    if (!title || !desc || !time || !matchDate || !content || !file) {
       return NextResponse.json({ error: "Validation Error: Missing fields" }, { status: 400 });
     }
 
-    const timeDate = new Date(time);
 
     await connect();
 
     const newPost = new Post({
       title,
       desc,
-      time: new Date(time),
+      time,
+      matchDate,
       content,
       file,
     });

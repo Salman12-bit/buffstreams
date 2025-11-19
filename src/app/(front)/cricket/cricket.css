@@ -1,137 +1,198 @@
-.cricket-page {
-  padding: 30px;
-  background: #0b0e13;
-  min-height: 100vh;
-  color: #fff;
-  margin-top: 50px;
-}
 
+.cricket-page {
+  padding: 20px 20px 60px;
+  background: #0f0f0f;
+  color: #fff;
+  min-height: 100vh;
+}
 
 .filter-bar {
   display: flex;
+  align-items: center;
   gap: 12px;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
+  margin-top: 70px;
 }
 
 .filter-btn {
-  background: #1b1f27;
-  color: #cbd5e1;
-  padding: 6px 18px;
+  background: #1b1b1b;
+  color: #fff;
+  padding: 8px 18px;
   border-radius: 6px;
-  border: 1px solid #2a2f3a;
+  border: 1px solid #2c2c2c;
   cursor: pointer;
+  transition: 0.2s ease;
   font-size: 14px;
 }
 
 .filter-btn.active,
 .filter-btn:hover {
-  background: #2563eb;
-  color: #fff;
+  background: #ff7a00;
+  border-color: #ff7a00;
 }
 
 .filter-select {
-  background: #1b1f27;
-  color: #cbd5e1;
-  padding: 6px 18px;
+  background: #1b1b1b;
+  border: 1px solid #2c2c2c;
+  padding: 8px 18px;
   border-radius: 6px;
-  border: 1px solid #2a2f3a;
+  color: #fff;
 }
 
 
 .date-heading {
-  margin: 20px 0 10px;
+  margin: 30px 0 15px;
   font-size: 18px;
-  font-weight: 700;
-  color: #94a3b8;
+  font-weight: bold;
+  color: #ffffffcc;
 }
+
 .date-heading span {
-  color: #fff;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #bdbcbc;
 }
 
 
 .match-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 18px;
 }
 
 
-.match-card {
-  background: #10141b;
-  border: 1px solid #1f2937;
-  border-radius: 10px;
-  padding: 14px;
+.card-wrapper {
   position: relative;
-  transition: 0.2s ease;
+}
+
+
+.match-card {
+  position: relative;
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
   cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+  border: 1px solid #2a2a2a;
 }
+
 .match-card:hover {
-  transform: translateY(-4px);
-  border-color: #2563eb;
+  transform: scale(1.03);
+  box-shadow: 0px 0px 18px rgba(255, 122, 0, 0.4);
 }
+
 
 .match-date {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #1e293b;
-  padding: 3px 10px;
-  border-radius: 6px;
+  top: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 4px 8px;
   font-size: 12px;
-  color: #e5e7eb;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+  z-index: 5;
 }
 
 .match-star {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #f97316;
-  color: #fff;
-  padding: 3px 6px;
-  border-radius: 50%;
-  font-size: 13px;
+  top: 8px;
+  right: 8px;
+  color: #ff7a00;
+  font-size: 18px;
+  z-index: 5;
 }
 
-.image-bg img {
-  width: 80%;
-  border-radius: 6px;
-  margin: 20px auto 0;
-}
-.image-bg {
-  display: flex;
-  justify-content: center;
+
+.match-flags.image-bg {
+  width: 100%;
+  height: 120px;
+  background: #000;
+  overflow: hidden;
 }
 
+.match-flags img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .match-title {
-  margin-top: 12px;
+  padding: 10px 10px 5px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: bold;
+  color: #eaeaea;
+  min-height: 48px;
 }
 
 .match-league {
-  color: #9ca3af;
+  padding: 0 10px;
   font-size: 13px;
+  color: #bbbbbb;
 }
+
 
 .match-time {
-  color: #e5e7eb;
+  padding: 0 10px 12px;
   font-size: 13px;
+  font-weight: bold;
+  color: #ffb86c;
 }
 
+
+.match-info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  padding-top: 5px;
+  font-size: 13px;
+  color: #e4e4e4;
+}
+
+.left-time {
+  font-weight: bold;
+  color: #ffb86c;
+}
+
+.right-league {
+  opacity: 0.8;
+}
 
 .delete-btn {
-  margin-top: 10px;
+  margin-top: 8px;
   width: 100%;
-  background: #ef4444;
   padding: 6px;
-  border-radius: 6px;
+  background: #ff3b3b;
   border: none;
-  color: white;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
+  color: #fff;
+  font-size: 13px;
+  transition: 0.2s ease;
 }
+
 .delete-btn:hover {
-  background: #dc2626;
+  background: #d62d2d;
+}
+
+
+.loader {
+  width: 100%;
+  text-align: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #444;
+  border-top: 4px solid #ff7a00;
+  border-radius: 50%;
+  margin: 40px auto;
+  animation: spinLoader 0.8s linear infinite;
+}
+
+@keyframes spinLoader {
+  to {
+    transform: rotate(360deg);
+  }
 }
