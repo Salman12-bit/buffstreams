@@ -1,31 +1,27 @@
 "use client";
 
-import "./cricket.css";
+import "./football.css";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react"; // ✅ Import useSession
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
-export default function Cricketpage() {
-  const router = useRouter();
-  const { data: session } = useSession(); // ✅ useSession hook
+export default function Footballpage() {
+  const { data: session } = useSession();
+
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [timeFilter, setTimeFilter] = useState("");
 
   const getData = async () => {
-    setIsLoading(true);
     try {
-      const res = await fetch("api/posts", { cache: "no-store" });
+      const res = await fetch("/api/posts", { cache: "no-store" });
       if (!res.ok) throw new Error("Failed to fetch posts");
-
       const json = await res.json();
       setData(json);
       setErr(false);
     } catch (error) {
       console.log("Fetch error:", error);
       setErr(true);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -34,95 +30,119 @@ export default function Cricketpage() {
   }, []);
 
   const handleDelete = async (id) => {
-    if (session?.user?.role !== "admin") return; // ✅ Admin-only check
+    if (session?.user?.role !== "admin") return;
     try {
       await fetch(`/api/posts/${id}`, { method: "DELETE" });
       getData();
     } catch (err) {
-      console.log("Delete error:", err);
+      console.log(err);
     }
   };
 
-  const handleCardClick = (id) => {
-    router.push("/livematch");
+ 
+  const filteredMatches = data
+    .filter((post) =>
+      ["football", "soccer", "fifa"].some(
+        (word) =>
+          post.desc?.toLowerCase().includes(word) ||
+          post.title?.toLowerCase().includes(word)
+      )
+    )
+    .filter((post) => {
+      if (!timeFilter) return true;
+      const isAM = post.time.toUpperCase().includes("AM");
+      const isPM = post.time.toUpperCase().includes("PM");
+      return (timeFilter === "AM" && isAM) || (timeFilter === "PM" && isPM);
+    });
+
+ 
+  const groupByDate = (posts) => {
+    return posts.reduce((groups, post) => {
+      const dateKey = new Date(post.matchDate).toDateString();
+      if (!groups[dateKey]) groups[dateKey] = [];
+      groups[dateKey].push(post);
+      return groups;
+    }, {});
   };
+
+  const grouped = groupByDate(filteredMatches);
+
+  if (err) return <p>Error loading matches.</p>;
+
+  
+  const sortedDates = Object.keys(grouped).sort((a, b) => {
+    return new Date(a) - new Date(b);
+  });
+
+  
+  const today = new Date().toDateString();
+
+  const finalDates = [
+    today,
+    ...sortedDates.filter((d) => d !== today)
+  ];
 
   return (
     <section className="cricket-page">
       <div className="filter-bar">
         <button className="filter-btn active">Live</button>
-        <button className="filter-btn">Popular</button>
 
-        <select className="filter-select">
-          <option>Football / Soccer Matches</option>
+        <select
+          className="filter-select"
+          value={timeFilter}
+          onChange={(e) => setTimeFilter(e.target.value)}
+        >
+          <option value="">All Matches</option>
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
         </select>
+
+        <button className="filter-btn">Popular</button>
       </div>
 
-      <h3 className="date-heading">
-        TODAY <span>{new Date().toDateString()}</span>
-      </h3>
+      {finalDates.map((date) => {
+        if (!grouped[date]) return null; 
 
-      <div className="match-grid">
-        {isLoading ? (
-          <div className="loader"><div className="spinner"></div></div>
-        ) : err ? (
-          <p className="error">Error loading posts.</p>
-        ) : (
-          data
-            ?.filter((post) =>
-              post.title?.toLowerCase().includes("football") ||
-              post.content?.toLowerCase().includes("football") ||
-              post.title?.toLowerCase().includes("soccer") ||
-              post.content?.toLowerCase().includes("soccer") ||
-              post.title?.toLowerCase().includes("fifa") ||
-              post.content?.toLowerCase().includes("fifa") ||
-              post.title?.toLowerCase().includes("epl") ||
-              post.content?.toLowerCase().includes("epl") ||
-              post.title?.toLowerCase().includes("premier league") ||
-              post.content?.toLowerCase().includes("premier league") ||
-              post.title?.toLowerCase().includes("la liga") ||
-              post.content?.toLowerCase().includes("la liga") ||
-              post.title?.toLowerCase().includes("champions league") ||
-              post.content?.toLowerCase().includes("champions league") ||
-              post.title?.toLowerCase().includes("goal") ||
-              post.content?.toLowerCase().includes("goal") ||
-              post.title?.toLowerCase().includes("penalty") ||
-              post.content?.toLowerCase().includes("penalty") ||
-              post.title?.toLowerCase().includes("world cup") ||
-              post.content?.toLowerCase().includes("world cup")
-            )
-            .map((post) => (
-              <div className="card-wrapper" key={post._id}>
+        const d = new Date(date);
+        const dayName = d.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
+        const month = d.toLocaleDateString("en-US", { month: "short" }).toUpperCase();
+        const dayNum = d.getDate();
 
-                {/* ✅ Clickable card */}
-                <div
-                  className="match-card"
-                  onClick={() => handleCardClick(post._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <div className="match-date">{post.date || "Today"}</div>
-                  <div className="match-star">★</div>
-                  <div className="match-flags image-bg">
-                    <img src={post.file} alt="post" />
-                  </div>
-                  <h4 className="match-title">{post.title}</h4>
-                  <p className="match-league">{post.content}</p>
-                  <p className="match-time">{post.time || "No Time"}</p>
+        return (
+          <div key={date}>
+            <h3 className="date-heading">
+              {dayName} <span>{month} {dayNum}</span>
+            </h3>
+
+            <div className="match-grid">
+              {grouped[date].map((post) => (
+                <div className="card-wrapper" key={post._id}>
+                  <Link href={`/${post._id}`}>
+                    <div className="match-card">
+                      <div className="match-date">{month} {dayNum}</div>
+                      <div className="match-star">★</div>
+                      <div className="match-flags image-bg">
+                        <img src={post.file} alt={post.title} />
+                      </div>
+                      <h4 className="match-title">{post.title}</h4>
+                      <div className="match-info-row">
+                        <span className="left-time">{post.time}</span>
+                        <span className="right-league">{post.desc}</span>
+                      </div>
+                    </div>
+                  </Link>
+
+                  {session?.user?.role === "admin" && (
+                    <button className="delete-btn" onClick={() => handleDelete(post._id)}>
+                      Delete
+                    </button>
+                  )}
                 </div>
-
-                {/* ✅ Delete button for admin only */}
-                {session?.user?.role === "admin" && (
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(post._id)}
-                  >
-                    Delete
-                  </button>
-                )}
-              </div>
-            ))
-        )}
-      </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </section>
   );
 }

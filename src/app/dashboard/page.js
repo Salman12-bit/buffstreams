@@ -17,16 +17,20 @@ const buffDashboard = () => {
     const title = e.target[0].value;
     const desc = e.target[1].value;
     const timeInput = e.target[2].value; 
-    const matchDate = e.target[3].value;
+    const matchDate = e.target[3].value; 
     const content = e.target[4].value;
-    const file = e.target[5].files[0];
+    const streamLink = e.target[5].value;
+    const file = e.target[6].files[0];
 
     
     const [hour, minute] = timeInput.split(":");
     let hourNum = parseInt(hour);
     const ampm = hourNum >= 12 ? "PM" : "AM";
-    hourNum = hourNum % 12 || 12; 
-    const time = `${hourNum}:${minute} ${ampm}`; 
+    hourNum = hourNum % 12 || 12;
+    const time = `${hourNum}:${minute} ${ampm}`;
+
+    
+    const startTime = new Date(`${matchDate}T${timeInput}:00`);
 
     let imageUrl;
     if (file) {
@@ -59,10 +63,12 @@ const buffDashboard = () => {
     const payload = {
       title,
       desc,
-      time,        // Send the 12-hour time with AM/PM
+      time,
       matchDate,
       content,
+      streamLink,
       file: imageUrl,
+      startTime,
     };
 
     try {
@@ -131,6 +137,11 @@ const buffDashboard = () => {
               <label htmlFor="content">Content</label>
               <input type="text" name="content" placeholder="content" required className="input" />
             </div>
+            <div className="input-container">
+              <label htmlFor="streamLink">Stream Link</label>
+              <input type="text" name="streamLink" placeholder="https://example.com/live" required className="input" />
+            </div>
+
             <div className="input-container">
               <label htmlFor="file">Upload File</label>
               <input type="file" name="file" className="input" required />

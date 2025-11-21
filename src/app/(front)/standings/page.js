@@ -14,22 +14,19 @@ export default function StandingsPage() {
     points: "",
   });
 
-  // Load from localStorage only in browser
+  
   useEffect(() => {
     const saved = localStorage.getItem("standings");
     if (saved) {
       setStandings(JSON.parse(saved));
     } else {
       setStandings([
-        { id: 1, team: "India", played: 5, won: 4, lost: 1, points: 8 },
-        { id: 2, team: "Australia", played: 5, won: 3, lost: 2, points: 6 },
-        { id: 3, team: "England", played: 5, won: 2, lost: 3, points: 4 },
-        { id: 4, team: "Pakistan", played: 5, won: 1, lost: 4, points: 2 },
+        
       ]);
     }
   }, []);
 
-  // Save to localStorage whenever standings change
+  
   useEffect(() => {
     if (standings.length > 0) {
       localStorage.setItem("standings", JSON.stringify(standings));

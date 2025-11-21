@@ -4,6 +4,7 @@ import Post from "@/models/Post";
 
 export const GET = async (request, { params }) => {
   const { id } = params;
+  console.log("ID from params:", id);
 
   try {
     await connect();
@@ -15,6 +16,7 @@ export const GET = async (request, { params }) => {
     return new NextResponse("Database Error", { status: 500 });
   }
 };
+
 
 export const DELETE = async (request, { params }) => {
   const { id } = params;
