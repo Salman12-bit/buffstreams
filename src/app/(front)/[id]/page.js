@@ -2,12 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import "./post.css";
 
 export default function PostPage() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
+    if (!id) return;
+
     const fetchPost = async () => {
       const baseUrl =
         typeof window !== "undefined" && window.location.origin
@@ -24,20 +28,102 @@ export default function PostPage() {
       }
 
       const data = await res.json();
-      setPost(data);
+
+      const dateParts = data.matchDate.split("-");
+      const matchDate = new Date(
+        parseInt(dateParts[0]),
+        parseInt(dateParts[1]) - 1,
+        parseInt(dateParts[2])
+      );
+
+      const timeObj = new Date(data.startTime);
+      matchDate.setHours(
+        timeObj.getHours(),
+        timeObj.getMinutes(),
+        0,
+        0
+      );
+
+      const formattedDate = matchDate.toLocaleDateString([], {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      const formattedTime = matchDate.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
+
+      setPost({
+        ...data,
+        formattedDate,
+        formattedTime,
+        matchDateObj: matchDate,
+      });
+
+      setHasStarted(new Date() >= matchDate);
     };
 
     fetchPost();
   }, [id]);
 
+  useEffect(() => {
+    if (!post?.matchDateObj) return;
+
+    const timer = setInterval(() => {
+      const now = new Date();
+      if (now >= post.matchDateObj) {
+        setHasStarted(true);
+        clearInterval(timer);
+      }
+    }, 10000);
+
+    return () => clearInterval(timer);
+  }, [post]);
+
+  if (!post) return null;
+
   return (
-    <div>
-      <h1>{post?.title}</h1>
-      <p>{post?.desc}</p>
+    <div className="post-container">
+      <div className="post-card card-glow">
 
-      {post?.file && <img src={post.file} alt={post.title} />}
+        <div className="card-header">
+          <h1 className="post-title">{post.title}</h1>
+          <span className="streams-tag">1 stream</span>
+        </div>
 
-      <p>Time: {post?.time}</p>
+        {!hasStarted ? (
+          <div className="match-box">
+            <p className="waiting-text">
+              ⏳ Match will start at <b>{post.formattedTime}</b>
+            </p>
+            <p className="date-text">📅 {post.formattedDate}</p>
+          </div>
+        ) : (
+          <>
+            <div className="stream-item">
+              <div className="left">
+                <span className="badge-hd">HD</span>
+                <span className="stream-name">Stream 1</span>
+              </div>
+
+              <span className="lang-tag">🌐 English</span>
+            </div>
+
+            <div className="stream-box">
+              <iframe
+                src={post.streamLink}
+                allowFullScreen
+                frameBorder="0"
+                className="stream-iframe"
+              ></iframe>
+            </div>
+          </>
+        )}
+
+      </div>
     </div>
   );
 }
