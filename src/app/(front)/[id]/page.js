@@ -29,6 +29,7 @@ export default function PostPage() {
 
       const data = await res.json();
 
+      // -------- FIXED TIME PARSING HERE --------
       const dateParts = data.matchDate.split("-");
       const matchDate = new Date(
         parseInt(dateParts[0]),
@@ -36,13 +37,15 @@ export default function PostPage() {
         parseInt(dateParts[2])
       );
 
-      const timeObj = new Date(data.startTime);
-      matchDate.setHours(
-        timeObj.getHours(),
-        timeObj.getMinutes(),
-        0,
-        0
-      );
+      // FIX: No timezone conversion
+      const [hour, minute] = data.time.split(" ")[0].split(":");
+      const ampm = data.time.split(" ")[1];
+
+      let fixedHour = parseInt(hour);
+      if (ampm === "PM" && fixedHour !== 12) fixedHour += 12;
+      if (ampm === "AM" && fixedHour === 12) fixedHour = 0;
+
+      matchDate.setHours(fixedHour, parseInt(minute), 0, 0);
 
       const formattedDate = matchDate.toLocaleDateString([], {
         year: "numeric",
@@ -108,7 +111,6 @@ export default function PostPage() {
                 <span className="badge-hd">HD</span>
                 <span className="stream-name">Stream 1</span>
               </div>
-
               <span className="lang-tag">🌐 English</span>
             </div>
 
