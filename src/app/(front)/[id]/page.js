@@ -29,7 +29,7 @@ export default function PostPage() {
 
       const data = await res.json();
 
-      // -------- FIXED TIME PARSING HERE --------
+
       const dateParts = data.matchDate.split("-");
       const matchDate = new Date(
         parseInt(dateParts[0]),
@@ -37,7 +37,7 @@ export default function PostPage() {
         parseInt(dateParts[2])
       );
 
-      // FIX: No timezone conversion
+
       const [hour, minute] = data.time.split(" ")[0].split(":");
       const ampm = data.time.split(" ")[1];
 
@@ -117,11 +117,14 @@ export default function PostPage() {
             <div className="stream-box">
               <iframe
                 src={post.streamLink}
-                allowFullScreen
-                frameBorder="0"
                 className="stream-iframe"
+                title={post.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
               ></iframe>
             </div>
+
           </>
         )}
 
