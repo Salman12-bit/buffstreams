@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import YouTubePlayer from "@/components/YouTubePlayer";
 import "./post.css";
+
 
 export default function PostPage() {
   const { id } = useParams();
@@ -29,14 +31,12 @@ export default function PostPage() {
 
       const data = await res.json();
 
-
       const dateParts = data.matchDate.split("-");
       const matchDate = new Date(
         parseInt(dateParts[0]),
         parseInt(dateParts[1]) - 1,
         parseInt(dateParts[2])
       );
-
 
       const [hour, minute] = data.time.split(" ")[0].split(":");
       const ampm = data.time.split(" ")[1];
@@ -115,14 +115,10 @@ export default function PostPage() {
             </div>
 
             <div className="stream-box">
-              <iframe
-                src={post.streamLink}
-                className="stream-iframe"
+              <YouTubePlayer
+                url={post.streamLink}
                 title={post.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
+              />
             </div>
 
           </>
