@@ -78,20 +78,31 @@
   cursor: pointer;
 }
 
-
 @media (max-width: 768px) {
   .navMenu {
     flex-direction: column;
     position: absolute;
     top: 70px;
-    left: -100%;
-    width: 100%;
-    text-align: center;
-    transition: 0.5s ease-in-out;
+    right: 0;
+    width: 250px;
+    height: calc(100vh - 70px);
+    background-color: #1E2832;
+    padding-top: 20px;
+    text-align: left;
+
+    /* Hidden off-screen to right */
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+
+    overflow-y: auto;
   }
 
   .navMenu.active {
-    left: 0;
+    transform: translateX(0);
+  }
+
+  .navItem {
+    margin: 15px 20px;
   }
 
   .hamburger {
