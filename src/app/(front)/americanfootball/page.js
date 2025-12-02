@@ -39,7 +39,7 @@ export default function Afootballpage() {
     }
   };
 
-  // FILTER MATCHES
+  
   const filteredMatches = data
     .filter((post) =>
       ["american football", "nfl", "gridiron"].some(
@@ -53,9 +53,13 @@ export default function Afootballpage() {
       const isAM = post.time.toUpperCase().includes("AM");
       const isPM = post.time.toUpperCase().includes("PM");
       return (timeFilter === "AM" && isAM) || (timeFilter === "PM" && isPM);
-    });
+    })
+    .sort((a, b) => {
 
-  // GROUP BY DATE
+      const dateA = new Date(`${a.matchDate} ${a.time}`);
+      const dateB = new Date(`${b.matchDate} ${b.time}`);
+      return dateA - dateB;
+    });
   const groupByDate = (posts) => {
     return posts.reduce((groups, post) => {
       const dateKey = new Date(post.matchDate).toDateString();
@@ -69,12 +73,11 @@ export default function Afootballpage() {
 
   if (err) return <p>Error loading matches.</p>;
 
-  // SORT DATES ASC (Oldest → Newest)
   const sortedDates = Object.keys(grouped).sort((a, b) => {
     return new Date(a) - new Date(b);
   });
 
-  // TODAY SHOULD BE FIRST
+  
   const today = new Date().toDateString();
 
   const finalDates = [

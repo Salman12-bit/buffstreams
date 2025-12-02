@@ -53,6 +53,12 @@ export default function Hockeypage() {
       const isAM = post.time.toUpperCase().includes("AM");
       const isPM = post.time.toUpperCase().includes("PM");
       return (timeFilter === "AM" && isAM) || (timeFilter === "PM" && isPM);
+    })
+    .sort((a, b) => {
+
+      const dateA = new Date(`${a.matchDate} ${a.time}`);
+      const dateB = new Date(`${b.matchDate} ${b.time}`);
+      return dateA - dateB;
     });
 
 

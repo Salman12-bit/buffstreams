@@ -39,7 +39,7 @@ export default function Otherspage() {
     }
   };
 
- 
+
   const filteredMatches = data
     .filter((post) =>
       ["other", "others",].some(
@@ -53,9 +53,15 @@ export default function Otherspage() {
       const isAM = post.time.toUpperCase().includes("AM");
       const isPM = post.time.toUpperCase().includes("PM");
       return (timeFilter === "AM" && isAM) || (timeFilter === "PM" && isPM);
+    })
+    .sort((a, b) => {
+
+      const dateA = new Date(`${a.matchDate} ${a.time}`);
+      const dateB = new Date(`${b.matchDate} ${b.time}`);
+      return dateA - dateB;
     });
 
- 
+
   const groupByDate = (posts) => {
     return posts.reduce((groups, post) => {
       const dateKey = new Date(post.matchDate).toDateString();
@@ -69,12 +75,12 @@ export default function Otherspage() {
 
   if (err) return <p>Error loading matches.</p>;
 
-  
+
   const sortedDates = Object.keys(grouped).sort((a, b) => {
     return new Date(a) - new Date(b);
   });
 
-  
+
   const today = new Date().toDateString();
 
   const finalDates = [
@@ -101,7 +107,7 @@ export default function Otherspage() {
       </div>
 
       {finalDates.map((date) => {
-        if (!grouped[date]) return null; 
+        if (!grouped[date]) return null;
 
         const d = new Date(date);
         const dayName = d.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();

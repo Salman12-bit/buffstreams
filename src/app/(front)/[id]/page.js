@@ -35,6 +35,7 @@ export default function PostPage() {
 
       const data = await res.json();
 
+
       const dateParts = data.matchDate.split("-");
       const matchDate = new Date(
         parseInt(dateParts[0]),
@@ -80,8 +81,7 @@ export default function PostPage() {
     if (!post?.matchDateObj) return;
 
     const timer = setInterval(() => {
-      const now = new Date();
-      if (now >= post.matchDateObj) {
+      if (new Date() >= post.matchDateObj) {
         setHasStarted(true);
         clearInterval(timer);
       }
@@ -95,10 +95,66 @@ export default function PostPage() {
   return (
     <div className="post-container">
       <div className="post-card card-glow">
+
+
         <div className="card-header">
           <h1 className="post-title">{post.title}</h1>
           <span className="streams-tag">1 stream</span>
         </div>
+
+
+        {session?.user?.role === "admin" && (
+          <div className="edit-wrapper">
+            {editMode ? (
+              <div className="edit-box">
+                <input
+                  type="text"
+                  className="edit-input"
+                  value={newUrl}
+                  onChange={(e) => setNewUrl(e.target.value)}
+                  placeholder="Enter new streaming URL"
+                />
+                <button
+                  className="save-btn"
+                  onClick={async () => {
+                    const res = await fetch(`/api/posts/${id}`, {
+                      method: "PUT",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ streamLink: newUrl }),
+                    });
+
+                    if (res.ok) {
+                      alert("Stream Updated Successfully");
+                      setEditMode(false);
+                      setPost((prev) => ({ ...prev, streamLink: newUrl }));
+                    } else {
+                      alert("Error updating stream");
+                    }
+                  }}
+                >
+                  Save
+                </button>
+                <button
+                  className="cancel-btn"
+                  onClick={() => setEditMode(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                className="edit-btn"
+                onClick={() => {
+                  setNewUrl(post.streamLink);
+                  setEditMode(true);
+                }}
+              >
+                ✏️ Edit Stream
+              </button>
+            )}
+          </div>
+        )}
+
 
         {!hasStarted ? (
           <div className="match-box">
@@ -109,57 +165,6 @@ export default function PostPage() {
           </div>
         ) : (
           <>
-            {session?.user?.role === "admin" && (
-              <div className="edit-wrapper">
-                {editMode ? (
-                  <div className="edit-box">
-                    <input
-                      type="text"
-                      className="edit-input"
-                      value={newUrl}
-                      onChange={(e) => setNewUrl(e.target.value)}
-                      placeholder="Enter new streaming URL"
-                    />
-                    <button
-                      className="save-btn"
-                      onClick={async () => {
-                        const res = await fetch(`/api/posts/${id}`, {
-                          method: "PUT",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({ streamLink: newUrl }),
-                        });
-
-                        if (res.ok) {
-                          alert("Stream Updated Successfully");
-                          setEditMode(false);
-                          setPost((prev) => ({ ...prev, streamLink: newUrl }));
-                        } else {
-                          alert("Error updating stream");
-                        }
-                      }}
-                    >
-                      Save
-                    </button>
-                    <button
-                      className="cancel-btn"
-                      onClick={() => setEditMode(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    className="edit-btn"
-                    onClick={() => {
-                      setNewUrl(post.streamLink);
-                      setEditMode(true);
-                    }}
-                  >
-                    ✏️ Edit Stream
-                  </button>
-                )}
-              </div>
-            )}
 
             <div className="stream-item">
               <div className="left">
@@ -168,6 +173,7 @@ export default function PostPage() {
               </div>
               <span className="lang-tag">🌐 English</span>
             </div>
+
 
             <div className="stream-box">
               <YouTubePlayer url={post.streamLink} title={post.title} />
