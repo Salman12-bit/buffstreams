@@ -11,7 +11,7 @@ export const metadata = {
         url: "https://buffstreams.us/cricket",
         images: [
             {
-                url: "https://buffstreams.us/images/cricket-preview.jpg", // Replace with actual cricket image
+                url: "https://buffstreams.us/images/Cricket.webp",
                 width: 1200,
                 height: 630,
                 alt: "Watch Cricket matches live and upcoming on Buffstreams in HD",
@@ -27,33 +27,25 @@ export default function Layout({ children }) {
     const structuredData = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        name: "buffstreams.us Cricket Matches - Live & Upcoming",
-        url: "https://buffstreams.us/cricket",
-        description:
-            "Watch all Cricket matches live and upcoming on Buffstreams. Stream games in HD with schedule updates and advanced filtering for your favorite teams.",
-        mainEntity: {
-            "@type": "SportsEvent",
-            name: "Cricket Matches",
-            url: "https://buffstreams.us/cricket",
-            sport: "Cricket",
-            eventStatus: "https://schema.org/EventScheduled",
+        "name": "Cricket Live Streams on Buffstreams",
+        "url": "https://buffstreams.us/cricket",
+        "description":
+            "Cricket streaming page showing live and upcoming matches on Buffstreams.",
+        "about": {
+            "@type": "Thing",
+            "name": "Billiards"
         },
-        publisher: {
+        "publisher": {
             "@type": "Organization",
-            name: "Buffstreams",
-            logo: {
+            "name": "Buffstreams",
+            "logo": {
                 "@type": "ImageObject",
-                url: "https://buffstreams.us/images/logo.png",
-                width: 500,
-                height: 500,
-            },
+                "url": "https://buffstreams.us/images/Cricket.webp",
+                "width": 500,
+                "height": 500
+            }
         },
-        primaryImageOfPage: {
-            "@type": "ImageObject",
-            url: "https://buffstreams.us/images/cricket-preview.jpg", // Cricket preview image
-            width: 1200,
-            height: 630,
-        },
+
     };
 
     return (

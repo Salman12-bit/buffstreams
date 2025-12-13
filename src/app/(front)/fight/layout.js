@@ -11,7 +11,7 @@ export const metadata = {
         url: "https://buffstreams.us/fight",
         images: [
             {
-                url: "https://buffstreams.us/images/fight-preview.jpg", // Replace with actual fight image
+                url: "https://buffstreams.us/images/Fight.webp",
                 width: 1200,
                 height: 630,
                 alt: "Watch Fight matches live and upcoming on Buffstreams in HD",
@@ -27,33 +27,24 @@ export default function Layout({ children }) {
     const structuredData = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
-        name: "buffstreams.us Fight Matches - Live & Upcoming",
-        url: "https://buffstreams.us/fight",
-        description:
-            "Watch all Fight matches live and upcoming on Buffstreams. Stream games in HD with schedule updates and advanced filtering for your favorite fighters.",
-        mainEntity: {
-            "@type": "SportsEvent",
-            name: "Fight Matches",
-            url: "https://buffstreams.us/fight",
-            sport: "Fight",
-            eventStatus: "https://schema.org/EventScheduled",
+        "name": "Fight Live Streams on Buffstreams",
+        "url": "https://buffstreams.us/fight",
+        "description":
+            "Fight streaming page showing live and upcoming matches on Buffstreams.",
+        "about": {
+            "@type": "Thing",
+            "name": "Fight"
         },
-        publisher: {
+        "publisher": {
             "@type": "Organization",
-            name: "Buffstreams",
-            logo: {
+            "name": "Buffstreams",
+            "logo": {
                 "@type": "ImageObject",
-                url: "https://buffstreams.us/images/logo.png",
-                width: 500,
-                height: 500,
-            },
-        },
-        primaryImageOfPage: {
-            "@type": "ImageObject",
-            url: "https://buffstreams.us/images/fight-preview.jpg", // Fight preview image
-            width: 1200,
-            height: 630,
-        },
+                "url": "https://buffstreams.us/images/Fight.webp",
+                "width": 500,
+                "height": 500
+            }
+        }
     };
 
     return (

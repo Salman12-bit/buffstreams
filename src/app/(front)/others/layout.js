@@ -11,7 +11,7 @@ export const metadata = {
     url: "https://buffstreams.us/others",
     images: [
       {
-        url: "https://buffstreams.us/images/others-preview.jpg", // Replace with actual others image
+        url: "https://buffstreams.us/images/Others.webp", 
         width: 1200,
         height: 630,
         alt: "Watch other sports matches live and upcoming on Buffstreams in HD",
@@ -27,33 +27,24 @@ export default function Layout({ children }) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "buffstreams.us Other Sports Matches - Live & Upcoming",
-    url: "https://buffstreams.us/others",
-    description:
-      "Watch all other sports matches live and upcoming on Buffstreams. Stream games in HD with schedule updates and advanced filtering for your favorite events.",
-    mainEntity: {
-      "@type": "SportsEvent",
-      name: "Other Sports Matches",
-      url: "https://buffstreams.us/others",
-      sport: "Other Sports",
-      eventStatus: "https://schema.org/EventScheduled",
+    "name": "Others Live Streams on Buffstreams",
+    "url": "https://buffstreams.us/others",
+    "description":
+      "Others streaming page showing live and upcoming matches on Buffstreams.",
+    "about": {
+      "@type": "Thing",
+      "name": "Others"
     },
-    publisher: {
+    "publisher": {
       "@type": "Organization",
-      name: "Buffstreams",
-      logo: {
+      "name": "Buffstreams",
+      "logo": {
         "@type": "ImageObject",
-        url: "https://buffstreams.us/images/logo.png",
-        width: 500,
-        height: 500,
-      },
-    },
-    primaryImageOfPage: {
-      "@type": "ImageObject",
-      url: "https://buffstreams.us/images/others-preview.jpg", // Others preview image
-      width: 1200,
-      height: 630,
-    },
+        "url": "https://buffstreams.us/images/Others.webp",
+        "width": 500,
+        "height": 500
+      }
+    }
   };
 
   return (
