@@ -15,15 +15,15 @@ export default function RootLayout({ children }) {
           name="google-site-verification" content="oMZXDI1wVbxlIA9uS9BtkM9sorkjaO68P_GXgLyBJYI"
         />
         <link rel="icon" type="image/png" href="/favicon.webp" />
-      </head>
-
-      <body className={inter.className}>
 
         <Script
           src="//d1zhmd1pxxxajf.cloudfront.net/?dmhzd=1230539"
           strategy="afterInteractive"
           data-cfasync="false"
         />
+      </head>
+
+      <body className={inter.className}>
 
         <AuthProvider>
           <div className="container">
