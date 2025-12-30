@@ -9,21 +9,21 @@ export default function Home() {
   const router = useRouter();
 
   const sports = [
-    { name: "CRICKET", slug: "cricket", image: "/images/Cricket.webp" },
-    { name: "BASKETBALL", slug: "basketball", image: "/images/Basketball.webp" },
-    { name: "FOOTBALL", slug: "football", image: "/images/Football.webp" },
-    { name: "AMERICAN FOOTBALL", slug: "americanfootball", image: "/images/AmericanFootball.webp" },
-    { name: "HOCKEY", slug: "hockey", image: "/images/Hockey.webp" },
-    { name: "BASEBALL", slug: "baseball", image: "/images/Baseball.webp" },
-    { name: "MOTOR-SPORTS", slug: "motorsports", image: "/images/Motorsports.webp" },
-    { name: "FIGHT", slug: "fight", image: "/images/Fight.webp" },
-    { name: "TENNIS", slug: "tennis", image: "/images/Tennis.webp" },
-    { name: "RUGBY", slug: "rugby", image: "/images/Rugby.webp" },
-    { name: "GOLF", slug: "golf", image: "/images/Golf.webp" },
-    { name: "BILLIARDS", slug: "billiards", image: "/images/Billiards.webp" },
-    { name: "AFL", slug: "afl", image: "/images/AFL.webp" },
-    { name: "DARTS", slug: "darts", image: "/images/Darts.webp" },
-    { name: "OTHERS", slug: "others", image: "/images/Others.webp" },
+    { name: "CRICKET", slug: "cricketmatches", image: "/images/Cricket.webp" },
+    { name: "BASKETBALL", slug: "basketballmathes", image: "/images/Basketball.webp" },
+    { name: "FOOTBALL", slug: "footballmatches", image: "/images/Football.webp" },
+    { name: "AMERICAN FOOTBALL", slug: "americanfootballmatches", image: "/images/AmericanFootball.webp" },
+    { name: "HOCKEY", slug: "hockeymatches", image: "/images/Hockey.webp" },
+    { name: "BASEBALL", slug: "baseballmatches", image: "/images/Baseball.webp" },
+    { name: "MOTOR-SPORTS", slug: "motorsportmatches", image: "/images/Motorsports.webp" },
+    { name: "FIGHT", slug: "fightmatches", image: "/images/Fight.webp" },
+    { name: "TENNIS", slug: "tennismatches", image: "/images/Tennis.webp" },
+    { name: "RUGBY", slug: "rugbymatches", image: "/images/Rugby.webp" },
+    { name: "GOLF", slug: "golfmatches", image: "/images/Golf.webp" },
+    { name: "BILLIARDS", slug: "billiardmatches", image: "/images/Billiards.webp" },
+    { name: "AFL", slug: "aflmatches", image: "/images/AFL.webp" },
+    { name: "DARTS", slug: "dartmatches", image: "/images/Darts.webp" },
+    { name: "OTHERS", slug: "othermatches", image: "/images/Others.webp" },
   ];
 
 

@@ -7,103 +7,97 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/cricket</loc>
+    <loc>https://buffstreams.us/cricketmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
      <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/basketball</loc>
+    <loc>https://buffstreams.us/basketballmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
      <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/cricket</loc>
+    <loc>https://buffstreams.us/footballmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
      <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/football</loc>
+    <loc>https://buffstreams.us/americanfootballmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
      <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/americanfootball</loc>
-    <lastmod>2025-12-02</lastmod>
-    <changefreq>daily</changefreq>
-     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://buffstreams.us/hockey</loc>
+    <loc>https://buffstreams.us/hockeymatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/baseball</loc>
+    <loc>https://buffstreams.us/baseballmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
      <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/motorsports</loc>
+    <loc>https://buffstreams.us/motorsportmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
      <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/fight</loc>
+    <loc>https://buffstreams.us/fightmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
      <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/tennis</loc>
+    <loc>https://buffstreams.us/tennismatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/rugby</loc>
+    <loc>https://buffstreams.us/rugbymatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 <url>
-    <loc>https://buffstreams.us/golf</loc>
+    <loc>https://buffstreams.us/golfmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/billiards</loc>
+    <loc>https://buffstreams.us/billiardmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/afl</loc>
+    <loc>https://buffstreams.us/aflmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/darts</loc>
+    <loc>https://buffstreams.us/dartmatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/others</loc>
+    <loc>https://buffstreams.us/othermatches</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://buffstreams.us/standings</loc>
+    <loc>https://buffstreams.us/standingstable</loc>
     <lastmod>2025-12-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>

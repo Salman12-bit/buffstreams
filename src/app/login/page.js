@@ -14,7 +14,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // LocalStorage safe load (only on client)
+ 
   const [auth, setAuth] = useState(null);
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -25,7 +25,7 @@ const Login = () => {
     }
   }, []);
 
-  // Search params safe usage (only client)
+  
   useEffect(() => {
     if (params) {
       setError(params.get("error"));
@@ -92,7 +92,7 @@ const Login = () => {
           <p className="text-white">
             Don't have an account?
             <br />
-            <Link href="/register" className="text-white">Sign Up</Link> /
+            <Link href="/signup" className="text-white">Sign Up</Link> /
             <Link href="/forget" className="text-white">Forget Password</Link>
           </p>
         </div>
@@ -101,7 +101,7 @@ const Login = () => {
   );
 };
 
-// Wrap component in Suspense for client-only usage
+
 const LoginWithSuspense = () => (
   <Suspense fallback={<div>Loading...</div>}>
     <Login />

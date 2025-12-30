@@ -28,9 +28,9 @@ const Navbar = () => {
   const logout = async () => {
     localStorage.removeItem("key");
     await signOut({
-      callbackUrl: "https://buffstreams.us/login",
+      callbackUrl: "https://buffstreams.us/signin",
     });
-    window.location.href = "https://buffstreams.us/login";
+    window.location.href = "https://buffstreams.us/signin";
   };
 
   return (
@@ -47,23 +47,23 @@ const Navbar = () => {
             <FaHome /> Home
           </Link>
 
-          <Link href="/football" className={styles.navItem}>
+          <Link href="/footballmatches" className={styles.navItem}>
             <FaFutbol /> NFL
           </Link>
 
-          <Link href="/basketball" className={styles.navItem}>
+          <Link href="/basketballmathes" className={styles.navItem}>
             <FaBasketballBall /> NBA
           </Link>
 
-          <Link href="/baseball" className={styles.navItem}>
+          <Link href="/baseballmatches" className={styles.navItem}>
             <FaFootballBall /> MLB
           </Link>
 
-          <Link href="/fight" className={styles.navItem}>
+          <Link href="/fightmatches" className={styles.navItem}>
             <FaFootballBall /> UFC
           </Link>
 
-          <Link href="/standings" className={styles.navItem}>
+          <Link href="/standingstable" className={styles.navItem}>
             <GiPodium /> Standings
           </Link>
 
@@ -84,7 +84,7 @@ const Navbar = () => {
               <Link href="/login" className={styles.navItem}>
                 <FaSignInAlt /> Login
               </Link>
-              <Link href="/register" className={styles.navItem}>
+              <Link href="/signup" className={styles.navItem}>
                 <FaUserPlus /> Register
               </Link>
             </>

@@ -1,9 +1,9 @@
 export const metadata = {
     title: "Buffstreams Login",
-    description: "This is the login page for Buffstreams.",
+    description: "This is the Login page for Buffstreams.",
     openGraph: {
         title: "Buffstreams Login",
-        description: "Log in to access Buffstreams and start following live sports and streams.",
+        description: "Login to access Buffstreams and start following live sports and streams.",
         url: "https://buffstreams.us/login", 
         images: [
             {
