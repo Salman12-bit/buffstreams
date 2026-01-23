@@ -28,9 +28,9 @@ const Navbar = () => {
   const logout = async () => {
     localStorage.removeItem("key");
     await signOut({
-      callbackUrl: "https://buffstreams.us/signin",
+      callbackUrl: "https://buffstreams.us/login",
     });
-    window.location.href = "https://buffstreams.us/signin";
+    window.location.href = "https://buffstreams.us/login";
   };
 
   return (

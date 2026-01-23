@@ -228,7 +228,7 @@ export default function Home() {
           <p class="commit-highlight">
             🎯 Your passion is our priority — stay with Buffstreams and enjoy sports the way they’re meant to be watched!
           </p>
-          <Link href="football" class="commit-btn">Start Watching Live Now</Link>
+          <Link href="footballmatches" class="commit-btn">Start Watching Live Now</Link>
         </div>
       </section>
 

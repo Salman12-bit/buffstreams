@@ -7,10 +7,6 @@ export default function YouTubePlayer({ url, title }) {
     if (!url) return null;
 
 
-    const safeUrl = url.includes("?")
-        ? `${url}&autoplay=0`
-        : `${url}?autoplay=0`;
-
     if (failed) {
         return (
             <div style={{ color: "white", padding: "20px", textAlign: "center" }}>
@@ -28,13 +24,13 @@ export default function YouTubePlayer({ url, title }) {
 
     return (
         <iframe
-            src={safeUrl}
+            src={url}
             title={title}
             className="stream-iframe"
             frameBorder="0"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
             onError={() => setFailed(true)}
         ></iframe>
     );
-}
+} 
