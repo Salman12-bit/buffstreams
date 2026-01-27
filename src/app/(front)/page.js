@@ -10,7 +10,7 @@ export default function Home() {
 
   const sports = [
     { name: "CRICKET", slug: "cricketmatches", image: "/images/Cricket.webp" },
-    { name: "BASKETBALL", slug: "basketballmathes", image: "/images/Basketball.webp" },
+    { name: "BASKETBALL", slug: "basketballmatches", image: "/images/Basketball.webp" },
     { name: "FOOTBALL", slug: "footballmatches", image: "/images/Football.webp" },
     { name: "AMERICAN FOOTBALL", slug: "americanfootballmatches", image: "/images/AmericanFootball.webp" },
     { name: "HOCKEY", slug: "hockeymatches", image: "/images/Hockey.webp" },
@@ -89,11 +89,11 @@ export default function Home() {
         <div className="category-grid">
 
           {sports.map(sport => (
-            <div
+            <Link
               key={sport.slug}
+              href={`/${sport.slug}`}
               className="category-card"
               onClick={() => handleCardClick(sport.slug)}
-              style={{ cursor: "pointer" }}
             >
               <span className="badge hover-badge">
                 {viewCounts[sport.slug] ?? 0} 👁️
@@ -101,8 +101,9 @@ export default function Home() {
 
               <img src={sport.image} alt={sport.name} />
               <p>{sport.name}</p>
-            </div>
+            </Link>
           ))}
+
 
         </div>
       </section>
