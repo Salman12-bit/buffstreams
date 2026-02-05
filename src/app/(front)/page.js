@@ -10,7 +10,7 @@ export default function Home() {
 
   const sports = [
     { name: "CRICKET", slug: "cricketmatches", image: "/images/Cricket.webp" },
-    { name: "BASKETBALL", slug: "basketballmatches", image: "/images/Basketball.webp" },
+    { name: "BASKETBALL", slug: "basketballinfo", image: "/images/Basketball.webp" },
     { name: "FOOTBALL", slug: "footballmatches", image: "/images/Football.webp" },
     { name: "AMERICAN FOOTBALL", slug: "americanfootballmatches", image: "/images/AmericanFootball.webp" },
     { name: "HOCKEY", slug: "hockeymatches", image: "/images/Hockey.webp" },

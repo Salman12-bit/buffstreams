@@ -51,7 +51,7 @@ const Navbar = () => {
             <FaFutbol /> NFL
           </Link>
 
-          <Link href="/basketballmathes" className={styles.navItem}>
+          <Link href="/basketballinfo" className={styles.navItem}>
             <FaBasketballBall /> NBA
           </Link>
 
