@@ -301,3 +301,19 @@
   font-size: 16px;
   color: #cbd5e1;
 }
+
+.global-watch-corner {
+  position: absolute;
+  top: 70px; 
+  right: 20px;
+  background: linear-gradient(135deg, #1F2937, #161C24); 
+  color: #FFD700; 
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); 
+  letter-spacing: 0.5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
