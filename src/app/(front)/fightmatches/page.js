@@ -28,13 +28,13 @@ export default function Fightpage() {
   useEffect(() => {
     getData();
   }, []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setData((prev) => [...prev]);
-    }, 30000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setData((prev) => [...prev]);
+  //   }, 30000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const handleDelete = async (id) => {
     if (session?.user?.role !== "admin") return;
