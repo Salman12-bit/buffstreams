@@ -32,7 +32,7 @@ export default function Footer() {
         <span>|</span>
         <a href="#">Disclaimer</a>
         <span>|</span>
-        <a href="contactus">Contact Us</a>
+        <a href="contact">Contact Us</a>
       </div>
 
       {visible && (

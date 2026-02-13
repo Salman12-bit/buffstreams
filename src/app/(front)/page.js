@@ -9,25 +9,26 @@ export default function Home() {
   const router = useRouter();
 
   const sports = [
-    { name: "CRICKET", slug: "cricketmatches", image: "/images/Cricket.webp" },
-    { name: "BASKETBALL", slug: "basketballinfo", image: "/images/Basketball.webp" },
-    { name: "FOOTBALL", slug: "footballmatches", image: "/images/Football.webp" },
-    { name: "AMERICAN FOOTBALL", slug: "americanfootballmatches", image: "/images/AmericanFootball.webp" },
-    { name: "HOCKEY", slug: "hockeymatches", image: "/images/Hockey.webp" },
-    { name: "BASEBALL", slug: "baseballmatches", image: "/images/Baseball.webp" },
-    { name: "MOTOR-SPORTS", slug: "motorsportmatches", image: "/images/Motorsports.webp" },
-    { name: "FIGHT", slug: "fightmatches", image: "/images/Fight.webp" },
-    { name: "TENNIS", slug: "tennismatches", image: "/images/Tennis.webp" },
-    { name: "RUGBY", slug: "rugbymatches", image: "/images/Rugby.webp" },
-    { name: "GOLF", slug: "golfmatches", image: "/images/Golf.webp" },
-    { name: "BILLIARDS", slug: "billiardmatches", image: "/images/Billiards.webp" },
-    { name: "AFL", slug: "aflmatches", image: "/images/AFL.webp" },
-    { name: "DARTS", slug: "dartmatches", image: "/images/Darts.webp" },
-    { name: "OTHERS", slug: "othermatches", image: "/images/Others.webp" },
+    { name: "CRICKET", slug: "cricketmatch", image: "/images/Cricket.webp" },
+    { name: "BASKETBALL", slug: "basketballmatch", image: "/images/Basketball.webp" },
+    { name: "FOOTBALL", slug: "footballmatch", image: "/images/Football.webp" },
+    { name: "AMERICAN FOOTBALL", slug: "americanfootballmatch", image: "/images/AmericanFootball.webp" },
+    { name: "HOCKEY", slug: "hockeymatch", image: "/images/Hockey.webp" },
+    { name: "BASEBALL", slug: "baseballmatch", image: "/images/Baseball.webp" },
+    { name: "MOTOR-SPORTS", slug: "motorsportmatch", image: "/images/Motorsports.webp" },
+    { name: "FIGHT", slug: "fightmatch", image: "/images/Fight.webp" },
+    { name: "TENNIS", slug: "tennismatch", image: "/images/Tennis.webp" },
+    { name: "RUGBY", slug: "rugbymatch", image: "/images/Rugby.webp" },
+    { name: "GOLF", slug: "golfmatch", image: "/images/Golf.webp" },
+    { name: "BILLIARDS", slug: "billiardmatch", image: "/images/Billiards.webp" },
+    { name: "AFL", slug: "aflmatch", image: "/images/AFL.webp" },
+    { name: "DARTS", slug: "dartmatch", image: "/images/Darts.webp" },
+    { name: "OTHERS", slug: "othermatch", image: "/images/Others.webp" },
   ];
 
-
   const [viewCounts, setViewCounts] = useState({});
+  const [currentTime, setCurrentTime] = useState(new Date());
+
 
   useEffect(() => {
     const stored = sessionStorage.getItem("live_view_counts");
@@ -40,6 +41,7 @@ export default function Home() {
     }
   }, []);
 
+
   useEffect(() => {
     if (Object.keys(viewCounts).length > 0) {
       sessionStorage.setItem("live_view_counts", JSON.stringify(viewCounts));
@@ -48,18 +50,16 @@ export default function Home() {
 
   const handleCardClick = (slug) => {
     const key = `watching_${slug}`;
-
     if (!sessionStorage.getItem(key)) {
       setViewCounts(prev => ({
         ...prev,
         [slug]: prev[slug] + 1,
       }));
-
       sessionStorage.setItem(key, "true");
     }
-
     router.push("/" + slug);
   };
+
 
   useEffect(() => {
     const handleUnload = () => {
@@ -83,11 +83,28 @@ export default function Home() {
     return () => window.removeEventListener("beforeunload", handleUnload);
   }, []);
 
+
+  useEffect(() => {
+    const interval = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatGlobalTime = (date) => {
+    const pk = date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true, timeZone: "Asia/Karachi" });
+    const et = date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true, timeZone: "America/New_York" });
+    const gmt = date.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true, timeZone: "GMT" });
+    return `PK ${pk} | USA ${et} | 🌐 ${gmt}`;
+  };
+
   return (
     <div className="home">
+      <section className="global-watch-section">
+        <div className="global-watch-corner">
+          ⏰ {formatGlobalTime(currentTime)} PKT
+        </div>
+      </section>
       <section className="categories">
         <div className="category-grid">
-
           {sports.map(sport => (
             <Link
               key={sport.slug}
@@ -98,13 +115,10 @@ export default function Home() {
               <span className="badge hover-badge">
                 {viewCounts[sport.slug] ?? 0} 👁️
               </span>
-
               <img src={sport.image} alt={sport.name} />
               <p>{sport.name}</p>
             </Link>
           ))}
-
-
         </div>
       </section>
 
@@ -117,133 +131,64 @@ export default function Home() {
           Join Buffstreams today and discover why sports fans around the world trust us for the best free live sports streaming experience!
         </p>
       </section>
+
       <section className="why-section">
-
-        <h2 className="why-title">
-          <span></span>
-          WHY CHOOSE BUFFSTREAMS?
-          <span></span>
-        </h2>
-
+        <h2 className="why-title"><span></span>WHY CHOOSE BUFFSTREAMS?<span></span></h2>
         <div className="why-wrapper">
-
           <div className="why-item">
             <div className="why-number">1</div>
             <div className="why-box">
               <h3>Wide Range of Sports Coverage</h3>
-              <p>
-                Whether you love <strong>cricket</strong>, <strong>soccer</strong>, <strong>basketball</strong>, or <strong>MMA</strong>,
-                Buffstreams brings you all the action live. From the <em>Super Bowl</em> to the
-                <em>Premier League</em> and <em>NBA</em> — we make sure you never miss a moment.
-              </p>
+              <p>Whether you love <strong>cricket</strong>, <strong>soccer</strong>, <strong>basketball</strong>, or <strong>MMA</strong>, Buffstreams brings you all the action live. From the <em>Super Bowl</em> to the <em>Premier League</em> and <em>NBA</em> — we make sure you never miss a moment.</p>
             </div>
           </div>
-
           <div className="why-item">
             <div className="why-number">2</div>
             <div className="why-box">
               <h3>HD-Quality Streams</h3>
-              <p>
-                Enjoy smooth, <strong>HD-quality live streaming</strong> with minimal buffering.
-                Our technology adjusts to your internet speed for the best possible viewing
-                experience — so you can focus on the excitement of the game.
-              </p>
+              <p>Enjoy smooth, <strong>HD-quality live streaming</strong> with minimal buffering. Our technology adjusts to your internet speed for the best possible viewing experience — so you can focus on the excitement of the game.</p>
             </div>
           </div>
-
           <div className="why-item">
             <div className="why-number">3</div>
             <div className="why-box">
               <h3>Fast & Reliable Updates</h3>
-              <p>
-                Get real-time match updates, highlights, and schedules — all in one place.
-                With Buffstreams, you’ll always stay connected to what’s happening in sports.
-              </p>
+              <p>Get real-time match updates, highlights, and schedules — all in one place. With Buffstreams, you’ll always stay connected to what’s happening in sports.</p>
             </div>
           </div>
-
         </div>
-
       </section>
+
       <section className="offer-section">
-
-        <h2 className="offer-title">
-          <span></span>
-          WHAT WE OFFER
-          <span></span>
-        </h2>
-
+        <h2 className="offer-title"><span></span>WHAT WE OFFER<span></span></h2>
         <div className="offer-grid">
-
-          <div className="offer-card">
-            <strong>Cricket:</strong> Stream top cricket leagues like the <em>IPL</em>, <em>PSL</em>, <em>BPL</em>, and <em>Big Bash League</em> live on Buffstreams.
-          </div>
-
-          <div className="offer-card">
-            <strong>Soccer:</strong> Watch matches from the <em>Premier League</em>, <em>La Liga</em>, and other top international football leagues.
-          </div>
-
-          <div className="offer-card">
-            <strong>NFL & NBA:</strong> Enjoy HD live streams of <em>NFL</em> games and thrilling <em>NBA</em> matchups, all in one place.
-          </div>
-
-          <div className="offer-card">
-            <strong>MMA & Boxing:</strong> Catch every punch and knockout from <em>UFC</em> and major boxing events in real time.
-          </div>
-
-          <div className="offer-card">
-            <strong>Tennis & Hockey:</strong> Follow every serve, goal, and highlight from <em>Grand Slam</em> tournaments and <em>NHL</em> games.
-          </div>
-
-          <div className="offer-card">
-            <strong>Motorsports:</strong> Stream exciting <em>F1</em>, <em>Nascar</em>, and <em>Motogp</em> races live and feel the rush of high-speed action.
-          </div>
-
-          <div className="offer-card">
-            <strong>eSports:</strong> Watch live tournaments for top games like <em>CS:GO</em>, <em>Valorant</em>, and <em>League of Legends</em> — all in real time.
-          </div>
-
-          <div className="offer-card">
-            <strong>Golf:</strong> Stay updated with live coverage from <em>PGA Tour</em> and other major golf championships worldwide.
-          </div>
-
+          <div className="offer-card"><strong>Cricket:</strong> Stream top cricket leagues like the <em>IPL</em>, <em>PSL</em>, <em>BPL</em>, and <em>Big Bash League</em> live on Buffstreams.</div>
+          <div className="offer-card"><strong>Soccer:</strong> Watch matches from the <em>Premier League</em>, <em>La Liga</em>, and other top international football leagues.</div>
+          <div className="offer-card"><strong>NFL & NBA:</strong> Enjoy HD live streams of <em>NFL</em> games and thrilling <em>NBA</em> matchups, all in one place.</div>
+          <div className="offer-card"><strong>MMA & Boxing:</strong> Catch every punch and knockout from <em>UFC</em> and major boxing events in real time.</div>
+          <div className="offer-card"><strong>Tennis & Hockey:</strong> Follow every serve, goal, and highlight from <em>Grand Slam</em> tournaments and <em>NHL</em> games.</div>
+          <div className="offer-card"><strong>Motorsports:</strong> Stream exciting <em>F1</em>, <em>Nascar</em>, and <em>Motogp</em> races live and feel the rush of high-speed action.</div>
+          <div className="offer-card"><strong>eSports:</strong> Watch live tournaments for top games like <em>CS:GO</em>, <em>Valorant</em>, and <em>League of Legends</em> — all in real time.</div>
+          <div className="offer-card"><strong>Golf:</strong> Stay updated with live coverage from <em>PGA Tour</em> and other major golf championships worldwide.</div>
         </div>
-
-
       </section>
-      <section class="commit-section">
-        <div class="commit-box">
+
+      <section className="commit-section">
+        <div className="commit-box">
           <h2>Buffstreams’ Commitment to True Sports Fans</h2>
-          <p>
-            At <strong>Buffstreams</strong>, we’re not just another streaming website — we’re your
-            dedicated companion for every thrilling sports moment. Whether it’s a nail-biting
-            <em>Premier League</em> match, a fierce <em>UFC</em> fight, or an intense <em>NBA</em> showdown,
-            our mission is to bring the stadium experience right to your screen.
-          </p>
-          <p>
-            With reliable, high-quality streams and instant access to live games, we make sure
-            you never miss a single play. Our team constantly works behind the scenes to enhance
-            your experience — so you can watch, cheer, and celebrate your favorite teams
-            without interruptions.
-          </p>
-          <p class="commit-highlight">
-            🎯 Your passion is our priority — stay with Buffstreams and enjoy sports the way they’re meant to be watched!
-          </p>
-          <Link href="footballmatches" class="commit-btn">Start Watching Live Now</Link>
+          <p>At <strong>Buffstreams</strong>, we’re not just another streaming website — we’re your dedicated companion for every thrilling sports moment. Whether it’s a nail-biting <em>Premier League</em> match, a fierce <em>UFC</em> fight, or an intense <em>NBA</em> showdown, our mission is to bring the stadium experience right to your screen.</p>
+          <p>With reliable, high-quality streams and instant access to live games, we make sure you never miss a single play. Our team constantly works behind the scenes to enhance your experience — so you can watch, cheer, and celebrate your favorite teams without interruptions.</p>
+          <p className="commit-highlight">🎯 Your passion is our priority — stay with Buffstreams and enjoy sports the way they’re meant to be watched!</p>
+          <Link href="footballmatches" className="commit-btn">Start Watching Live Now</Link>
+        </div>
+      </section>
+      <section className="experience-section">
+        <div className="experience-box">
+          <h2>Experience Buffstreams Today</h2>
+          <p>Join the thousands of sports fans who trust Buffstreams for their live sports streaming needs. Whether you're a die-hard NFL fan, a cricket enthusiast, or a casual viewer, Buffstreams is your ultimate destination for live sports coverage.</p>
         </div>
       </section>
 
-      <section class="experience-section">
-        <div class="experience-box">
-          <h2>Experience Buffstreams Today</h2>
-          <p>
-            Join the thousands of sports fans who trust Buffstreams for their live
-            sports streaming needs. Whether you're a die-hard NFL fan, a cricket
-            enthusiast, or a casual viewer, Buffstreams is your ultimate destination
-            for live sports coverage.
-          </p>
-        </div>
-      </section>
     </div>
   );
 }

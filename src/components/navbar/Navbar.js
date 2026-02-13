@@ -47,23 +47,23 @@ const Navbar = () => {
             <FaHome /> Home
           </Link>
 
-          <Link href="/footballmatches" className={styles.navItem}>
+          <Link href="/footballmatch" className={styles.navItem}>
             <FaFutbol /> NFL
           </Link>
 
-          <Link href="/basketballinfo" className={styles.navItem}>
+          <Link href="/basketballmatch" className={styles.navItem}>
             <FaBasketballBall /> NBA
           </Link>
 
-          <Link href="/baseballmatches" className={styles.navItem}>
+          <Link href="/baseballmatch" className={styles.navItem}>
             <FaFootballBall /> MLB
           </Link>
 
-          <Link href="/fightmatches" className={styles.navItem}>
+          <Link href="/fightmatch" className={styles.navItem}>
             <FaFootballBall /> UFC
           </Link>
 
-          <Link href="/standingstable" className={styles.navItem}>
+          <Link href="/standingstables" className={styles.navItem}>
             <GiPodium /> Standings
           </Link>
 
