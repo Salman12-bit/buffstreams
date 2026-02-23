@@ -16,11 +16,7 @@ export default function RootLayout({ children }) {
         />
         <link rel="icon" type="image/png" href="/favicon.webp" />
 
-        <Script
-          src="//d1zhmd1pxxxajf.cloudfront.net/?dmhzd=1230539"
-          strategy="afterInteractive"
-          data-cfasync="false"
-        />
+        <script data-cfasync="false" src="//d1zhmd1pxxxajf.cloudfront.net/?dmhzd=1230539"></script>
       </head>
 
       <body className={inter.className}>
