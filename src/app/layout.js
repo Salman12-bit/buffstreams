@@ -20,6 +20,18 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={inter.className}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RM7JYV2R97"
+        />
+
+        <Script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RM7JYV2R97');
+          `}
+        </Script>
 
         <AuthProvider>
           <div className="container">
