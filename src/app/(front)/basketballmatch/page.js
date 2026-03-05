@@ -159,10 +159,9 @@ export default function Basketballpage() {
                       <Image
                         src={post.file}
                         alt={post.title}
-                        width={600}
-                        height={350}
+                        width={255}
+                        height={135}
                         loading="lazy"
-                        sizes="(max-width:768px) 100vw, 33vw"
                       />
 
                       <h4 className="match-title">{post.title}</h4>
