@@ -3,7 +3,6 @@ const nextConfig = {
     async headers() {
         return [
             {
-                
                 source: "/(.*)",
                 headers: [
                     {
@@ -17,6 +16,10 @@ const nextConfig = {
                 ],
             },
         ];
+    },
+
+    images: {
+        domains: ["res.cloudinary.com"],
     },
 };
 

@@ -4,6 +4,7 @@ import "./football.css";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footballpage() {
   const { data: session } = useSession();
@@ -161,7 +162,13 @@ export default function Footballpage() {
                       <div className="match-date">{month} {dayNum}</div>
                       <div className="match-star">★</div>
                       <div className="match-flags image-bg">
-                        <img src={post.file} alt={post.title} />
+                        <Image
+                          src={post.file}
+                          alt={post.title}
+                          width={600}
+                          height={350}
+                          priority
+                        />
                       </div>
                       <h4 className="match-title">{post.title}</h4>
                       <div className="match-info-row">
