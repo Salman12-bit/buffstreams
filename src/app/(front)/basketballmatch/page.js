@@ -163,14 +163,15 @@ export default function Basketballpage() {
                         {month} {dayNum}
                       </div>
                       <div className="match-star">★</div>
-
-                      <Image
-                        src={post.file}
-                        alt={post.title}
-                        width={600}
-                        height={350}
-                        loading="lazy"
-                      />
+                      <div className="match-flags image-bg">
+                        <Image
+                          src={post.file}
+                          alt={post.title}
+                          width={600}
+                          height={350}
+                          loading="lazy"
+                        />
+                      </div>
 
                       <h4 className="match-title">{post.title}</h4>
 
