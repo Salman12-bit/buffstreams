@@ -12,19 +12,21 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta
-          name="google-site-verification" content="oMZXDI1wVbxlIA9uS9BtkM9sorkjaO68P_GXgLyBJYI"
+          name="google-site-verification"
+          content="oMZXDI1wVbxlIA9uS9BtkM9sorkjaO68P_GXgLyBJYI"
         />
         <link rel="icon" type="image/png" href="/favicon.webp" />
-
-        <script data-cfasync="false" src="//d1zhmd1pxxxajf.cloudfront.net/?dmhzd=1230539"></script>
       </head>
 
       <body className={inter.className}>
+
+
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RM7JYV2R97"
+          strategy="afterInteractive"
         />
 
-        <Script>
+        <Script id="ga-script" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -32,6 +34,12 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-RM7JYV2R97');
           `}
         </Script>
+
+
+        <Script
+          src="//d1zhmd1pxxxajf.cloudfront.net/?dmhzd=1230539"
+          strategy="lazyOnload"
+        />
 
         <AuthProvider>
           <div className="container">
