@@ -87,7 +87,11 @@ export default function PostPage() {
       <div className="post-card card-glow">
 
         <div className="card-header">
-          <h1 className="post-title">{post.title}</h1>
+          <h1 className="post-title">
+            {hasStarted
+              ? `Watch ${post.title} Live Stream Online`
+              : post.title}
+          </h1>
           <span className="streams-tag">1 stream</span>
         </div>
 
