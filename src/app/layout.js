@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
 
 
-        {/* <Script
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RM7JYV2R97"
           strategy="afterInteractive"
         />
@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
             gtag('js', new Date());
             gtag('config', 'G-RM7JYV2R97');
           `}
-        </Script> */}
+        </Script>
 
 
         <Script
