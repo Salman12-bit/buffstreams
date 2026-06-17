@@ -67,7 +67,7 @@ export default function Afootballpage() {
 
   const filteredMatches = data
     .filter((post) =>
-      ["american football", "nfl", "gridiron"].some(
+      ["american football", "nfl", "cfl", "ufl" ].some(
         (word) =>
           post.desc?.toLowerCase().includes(word) ||
           post.title?.toLowerCase().includes(word)

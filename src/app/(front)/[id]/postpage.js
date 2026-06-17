@@ -15,7 +15,6 @@ export default function PostPage() {
   const [editMode, setEditMode] = useState(false);
   const [newUrl, setNewUrl] = useState("");
 
-
   useEffect(() => {
     if (!id) return;
 
@@ -32,8 +31,11 @@ export default function PostPage() {
 
         const data = await res.json();
 
-
         const matchDate = new Date(`${data.matchDate} ${data.time}`);
+
+        const streamStart = new Date(
+          matchDate.getTime() - 15 * 60 * 1000
+        );
 
         const formattedDate = matchDate.toLocaleDateString([], {
           year: "numeric",
@@ -52,9 +54,11 @@ export default function PostPage() {
           formattedDate,
           formattedTime,
           matchDateObj: matchDate,
+          streamStartObj: streamStart,
         });
 
-        setHasStarted(new Date() >= matchDate);
+
+        setHasStarted(new Date() >= streamStart);
       } catch (err) {
         console.error("Fetch Error:", err);
       }
@@ -63,11 +67,10 @@ export default function PostPage() {
     fetchPost();
   }, [id]);
 
-
   useEffect(() => {
-    if (!post?.matchDateObj) return;
+    if (!post?.streamStartObj) return;
 
-    const delay = post.matchDateObj - new Date();
+    const delay = post.streamStartObj.getTime() - Date.now();
 
     if (delay > 0) {
       const timer = setTimeout(() => {
@@ -92,6 +95,7 @@ export default function PostPage() {
               ? `Watch Live ${post.title}`
               : post.title}
           </h1>
+
           <span className="streams-tag">1 stream</span>
         </div>
 
@@ -112,13 +116,20 @@ export default function PostPage() {
                   onClick={async () => {
                     const res = await fetch(`/api/posts/${id}`, {
                       method: "PUT",
-                      headers: { "Content-Type": "application/json" },
-                      body: JSON.stringify({ streamLink: newUrl }),
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({
+                        streamLink: newUrl,
+                      }),
                     });
 
                     if (res.ok) {
                       setEditMode(false);
-                      setPost((prev) => ({ ...prev, streamLink: newUrl }));
+                      setPost((prev) => ({
+                        ...prev,
+                        streamLink: newUrl,
+                      }));
                       alert("Stream Updated Successfully");
                     } else {
                       alert("Error updating stream");
@@ -154,20 +165,45 @@ export default function PostPage() {
             <p className="waiting-text">
               ⏳ Match will start at <b>{post.formattedTime}</b>
             </p>
-            <p className="date-text">📅 {post.formattedDate}</p>
+
+            <p className="date-text">
+              📅 {post.formattedDate}
+            </p>
+
+            <div className="stream-notice">
+              <p>
+                Thank you for choosing BuffStreams.
+              </p>
+
+              <p>
+                The live stream will become available 15 minutes before the scheduled kickoff time.
+              </p>
+
+              <p>
+                Please stay tuned and enjoy the match.
+              </p>
+            </div>
           </div>
         ) : (
           <>
             <div className="stream-item">
               <div className="left">
                 <span className="badge-hd">HD</span>
-                <span className="stream-name">Stream 1</span>
+                <span className="stream-name">
+                  Stream 1
+                </span>
               </div>
-              <span className="lang-tag">🌐 English</span>
+
+              <span className="lang-tag">
+                🌐 English
+              </span>
             </div>
 
             <div className="stream-box">
-              <YouTubePlayer url={post.streamLink} title={post.title} />
+              <YouTubePlayer
+                url={post.streamLink}
+                title={post.title}
+              />
             </div>
           </>
         )}
